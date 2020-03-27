@@ -53,6 +53,8 @@
         <dt>Refresh token</dt><dd class="text-overflow">{{refresh_token}}</dd>
       </dl>
     </script>
+      
+       <iframe src="" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" id="spotiplayer"></iframe>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
@@ -106,6 +108,7 @@
                     
                     var songs = response.items;
                     var hapiness = new Array();
+                    $("#spotiplayer").attr("src","https://open.spotify.com/embed/track/"+songs[0].track.id);
                     
                     for(var i=0; i<songs.length; i++)
                         {
