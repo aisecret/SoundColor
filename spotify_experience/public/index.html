@@ -2,10 +2,17 @@
 <html>
   <head>
     <title>Spotify Experience</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <!-- Bootstrap CSS CDN for Navigation -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Custom CSS for Navigation-->
+    <link rel="stylesheet" href="style/styleNav.css">
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="style/main.css">  
     <link rel="stylesheet" href="syle.css">
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>  
     <style type="text/css">
-      #login, #loggedin {
+      #login, #loggedin, #user-profile, #oauth, #obtain-new-token {
         display: none;
       }
       .text-overflow {
@@ -17,8 +24,17 @@
       body{
         background-color: #000;
       }
+          
     
     </style>
+      <script>
+        var dom1, dom2, dom3, dom4;
+
+        dom1 = 'blue';
+        dom2 = 'red';
+        dom3 = 'green';
+        dom4 = 'yellow';    
+    </script>
   </head>
 
   <body>
@@ -48,6 +64,47 @@
         <a href="/login" class="btn btn-primary">Log in with Spotify</a>
       </div>-->
       <div id="loggedin">
+
+        <div id="container">
+            <div class="row">
+                <div class="col-md-1">
+                    <video playsinline autoplay></video>
+                    <canvas id = "canvasDom1" class="miniCanvas"></canvas>
+                    <canvas id = "canvasDom2" class="miniCanvas"></canvas>
+                    <canvas id = "canvasDom3" class="miniCanvas"></canvas>
+                    <canvas id = "canvasDom4" class="miniCanvas"></canvas>
+                </div>
+                <div class="col-md-10">
+                    <canvas id = "canvasMain"></canvas>
+                </div>
+                <div class="col-md-1">
+                    <!-- Sidebar  -->
+                    <nav id="sidebar">
+                        <ul class="list-unstyled components">
+                            <li id="dom1">
+                                <a id="dom1Aura"  class="tooltip" href="#" onclick="return false";>
+                                </a>
+                            </li>
+                            <li id="dom2">
+                                <a id="dom2Aura"  class="tooltip" href="#" onclick="return false";>
+                                </a>
+                            </li>
+                            <li id="dom3">
+                                <a id="dom3Aura"  class="tooltip" ref="#" onclick="return false";>
+                                </a>
+                            </li>
+                            <li id="dom4">
+                                <a id="dom4Aura"  class="tooltip" href="#" onclick="return false";>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+              </div>
+
+        </div>
+
+          
         <div id="user-profile">
         </div>
         <div id="oauth">
@@ -82,7 +139,7 @@
        <iframe src="" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" id="spotiplayer"></iframe>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    
     <script>
       (function() {
 
@@ -179,6 +236,51 @@
         }
       })();
     </script>
+      
+     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="js/main.js" async></script>
+    <!-- <script src="../../../js/lib/ga.js"></script> -->
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebar').on('click', function () {                
+                var clicked = $(event.target).text();
+                var clickedDom;
+
+                if (clicked.includes("Energetic")) clicked = 'green';
+                else if (clicked.includes("Melancholic")) clicked = 'blue';
+                else if (clicked.includes("Passionate")) clicked = 'red';
+                else if (clicked.includes("Thoughtful")) clicked = 'yellow';
+
+                if (dom1 == clicked) clickedDom = 'dom1';
+                else if (dom2 == clicked) clickedDom = 'dom2';
+                else if (dom3 == clicked) clickedDom = 'dom3';
+                else if (dom4 == clicked) clickedDom = 'dom4';
+
+                if (clickedDom == 'dom2') {
+                    dom2 = dom1;
+                }
+                else if (clickedDom == 'dom3') {
+                    dom3 = dom2;
+                    dom2 = dom1;
+                }
+                else if (clickedDom == 'dom4'){
+                    dom4 = dom3;
+                    dom3 = dom2;
+                    dom2 = dom1;
+                }
+                dom1 = clicked;
+                drawNavBar();
+            });
+        });
+    </script>  
   </body>
 </html>
 
