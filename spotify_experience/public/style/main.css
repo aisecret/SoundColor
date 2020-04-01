@@ -36,9 +36,11 @@ audio {
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-  margin: 0;
   padding: 0;
   word-break: break-word;
+  background-color: #000;
+  position: relative;
+  z-index: -1;
 }
 
 button {
@@ -66,13 +68,6 @@ button[disabled] {
 
 button[disabled]:hover {
   background-color: #d84a38;
-}
-
-canvas {
-  background-color: #171822;
-  max-width: 100%;
-  width: 100%;
-  text-align: center;
 }
 
 code {
@@ -123,12 +118,22 @@ html {
 
 video, .miniCanvas {
   width:1%;
+  height: 0;
+  max-height: 100%;
+  z-index: -1;
 }
 
-video, canvas {
+canvas {
+  background-color: #000;
+  text-align: center;
   transform: rotateY(180deg);
   -webkit-transform:rotateY(180deg); /* Safari and Chrome */
   -moz-transform:rotateY(180deg); /* Firefox */
+  width: 90%;
+  height: 90%;
+  max-height: 90%;
+  position: absolute;
+  z-index: 1;
 }
 
 ul {

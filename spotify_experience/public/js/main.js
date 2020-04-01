@@ -21,34 +21,42 @@ const canvasDom2 = document.getElementById('canvasDom2');
 const canvasDom3 = document.getElementById('canvasDom3');
 const canvasDom4 = document.getElementById('canvasDom4');
 
-var domColor, domName, fixHeight = 745;
-
-document.getElementById('dom1Aura').style.height = fixHeight * 0.35 +"px";
-document.getElementById('dom2Aura').style.height = fixHeight * 0.3 +"px";
-document.getElementById('dom3Aura').style.height = fixHeight * 0.2 +"px";
-document.getElementById('dom4Aura').style.height = fixHeight * 0.15 +"px";
+var domColor, domName, heightProportion, fixHeight = 800;
+var frames = [];
 
 var tooltip = document.createElement("a");
 var textnode = document.createTextNode("I feel more like this");
 tooltip.className = "tooltiptext";
 tooltip.appendChild(textnode); 
 
-function drawNavBar(){
-  console.log(dom1, dom2, dom3, dom4);
-  document.getElementById('dom1').style.background = checkAura(dom1).color;
-  document.getElementById('dom2').style.background = checkAura(dom2).color;
-  document.getElementById('dom3').style.background = checkAura(dom3).color;
-  document.getElementById('dom4').style.background = checkAura(dom4).color;
-  
-  document.getElementById('dom1Aura').textContent = checkAura(dom1).name; 
-  document.getElementById('dom2Aura').textContent = checkAura(dom2).name;
-  document.getElementById('dom3Aura').textContent = checkAura(dom3).name;
-  document.getElementById('dom4Aura').textContent = checkAura(dom4).name;
+document.getElementById('blue').style.background = checkAura("blue").color;
+document.getElementById('red').style.background = checkAura("red").color;
+document.getElementById('green').style.background = checkAura("green").color;
+document.getElementById('yellow').style.background = checkAura("yellow").color;
 
-  document.getElementById("dom1Aura").appendChild(tooltip.cloneNode(true)); 
-  document.getElementById("dom2Aura").appendChild(tooltip.cloneNode(true)); 
-  document.getElementById("dom3Aura").appendChild(tooltip.cloneNode(true)); 
-  document.getElementById("dom4Aura").appendChild(tooltip.cloneNode(true));   
+document.getElementById('blueAura').textContent = checkAura("blue").name; 
+document.getElementById('redAura').textContent = checkAura("red").name;
+document.getElementById('greenAura').textContent = checkAura("green").name;
+document.getElementById('yellowAura').textContent = checkAura("yellow").name;
+
+document.getElementById("blueAura").appendChild(tooltip.cloneNode(true)); 
+document.getElementById("redAura").appendChild(tooltip.cloneNode(true)); 
+document.getElementById("greenAura").appendChild(tooltip.cloneNode(true)); 
+document.getElementById("yellowAura").appendChild(tooltip.cloneNode(true));   
+
+function orderFrame(){
+  frames = [];
+  frames.push(new Frame(20, 5, 300, 350, dom1, canvasDom1));
+  frames.push(new Frame(370, 20, 250, 220, dom2, canvasDom2));
+  frames.push(new Frame(250, 280, 180, 200, dom3, canvasDom3));
+  frames.push(new Frame(470, 300, 180, 130, dom4, canvasDom4));
+}
+
+function drawNavBar(){
+  document.getElementById('blueAura').style.height = fixHeight * checkDominance("blue") +"px";
+  document.getElementById('redAura').style.height = fixHeight * checkDominance("red") +"px";
+  document.getElementById('greenAura').style.height = fixHeight * checkDominance("green") +"px";
+  document.getElementById('yellowAura').style.height = fixHeight * checkDominance("yellow") +"px";
 }
 
 /*
@@ -57,6 +65,19 @@ function drawNavBar(){
     ctx.globalAlpha = 1;
     ctx.drawImage(captureIcon, 5, 5);
   */
+
+function checkDominance(color){
+  var position = frames.findIndex(x => x.fill === color);
+
+  console.log(position);
+
+  if (position == 0) heightProportion = 0.45;
+  else if (position == 1) heightProportion = 0.24;
+  else if (position == 2) heightProportion = 0.18;
+  else heightProportion = 0.13;
+
+  return heightProportion;
+}
 
 function checkAura(color){
 
@@ -72,12 +93,12 @@ function checkAura(color){
   }
   else if (color == "green"){
     domColor = '#064f40';
-    domName = 'Energetic';
+    domName = 'Thoughtful';
   }
   else if (color == "yellow"){
     domColor = '#FCD440';
-    domName = 'Thoughtful';
-  }
+    domName = 'Energetic';
+  } 
 
   Auras["color"] = domColor;
   Auras["name"] = domName;
@@ -94,11 +115,6 @@ function Frame(x, y, w, h, fill, miniCanvas) {
   this.miniCanvas = miniCanvas;
 }
 
-var frames = [];
-frames.push(new Frame(0, 0, 400, 500, dom1, canvasDom1));
-frames.push(new Frame(400, 0, 350, 300, dom2, canvasDom2));
-frames.push(new Frame(250, 300, 250, 200, dom3, canvasDom3));
-frames.push(new Frame(500, 300, 300, 200, dom4, canvasDom4));
 
 function initiateMiniCanvas(){
   for (var i in frames) {
@@ -116,12 +132,6 @@ function drawMainCanvas (){
   canvas.width = video.videoWidth;  
   canvas.height = video.videoHeight;
   
-  var frames = [];
-  frames.push(new Frame(0, 0, 400, 500, dom1, canvasDom1));
-  frames.push(new Frame(400, 0, 350, 300, dom2, canvasDom2));
-  frames.push(new Frame(250, 300, 250, 200, dom3, canvasDom3));
-  frames.push(new Frame(500, 300, 300, 200, dom4, canvasDom4));
-
   for (var i in frames) {
     var frame = frames[i];
 
@@ -173,13 +183,14 @@ function handleSuccess(stream) {
   window.stream = stream; // make stream available to browser console
   video.srcObject = stream;
 
+  setTimeout(orderFrame, 1000);
   setTimeout(initiateMiniCanvas, 1000);
   setTimeout(drawNavBar, 1000);
 
-  setInterval(blendMiniCanvas, 1000, 0);
-  setInterval(blendMiniCanvas, 3000, 1);
-  setInterval(blendMiniCanvas, 5000, 2);
-  setInterval(blendMiniCanvas, 8000, 3);
+  setInterval(blendMiniCanvas, 8000, 0);
+  setInterval(blendMiniCanvas, 5000, 1);
+  setInterval(blendMiniCanvas, 3000, 2);
+  setInterval(blendMiniCanvas, 1000, 3);
   
   setInterval(drawMainCanvas, 1000);
 

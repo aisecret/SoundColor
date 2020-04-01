@@ -20,11 +20,12 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         width: 500px;
+      }          
+      #spotiplayer{
+        position: relative;
+        z-index: 1;
+        margin: 700px auto 0 1000px;
       }
-      body{
-        background-color: #000;
-      }
-          
     
     </style>
       <script>
@@ -38,80 +39,74 @@
   </head>
 
   <body>
-   <div id="login">
-    <img src="./res/svg/one.svg" alt="" id="one" class="glow">
-    <img src="./res/svg/two.svg" alt="" id="two"  class="glow">
-    <img src="./res/svg/three.svg" alt="" id="three"  class="glow">
-    <h1 class="title">SoundShape</h1>
-    <h2 class="subtitle">Give shape to your moods</h2>
-    
-    <div>
-      <a class="btn-google " href="/login">
-        <div class="google-content">
-          <div class="logo">
-            <img src="./res/svg/spotify.svg" alt="">
+    <div id="login">
+      <img src="./res/svg/one.svg" alt="" id="one" class="glow">
+      <img src="./res/svg/two.svg" alt="" id="two"  class="glow">
+      <img src="./res/svg/three.svg" alt="" id="three"  class="glow">
+      <h1 class="title">SoundShape</h1>
+      <h2 class="subtitle">Give shape to your moods</h2>
+      
+      <div>
+        <a class="btn-google " href="/login">
+          <div class="google-content">
+            <div class="logo">
+              <img src="./res/svg/spotify.svg" alt="">
+            </div>
+            <p>Enter</p>
           </div>
-          <p>Enter</p>
-        </div>
-      </a>
-    </div>
+        </a>
+      </div>
     </div>   
 
-    <img src="./res/svg/info.svg" alt="" id="info">
     <!--<div class="container">
+    <img src="./res/svg/info.svg" alt="" id="info">
        <div id="login">
         <h1>This is an example of the Authorization Code flow</h1>
         <a href="/login" class="btn btn-primary">Log in with Spotify</a>
       </div>-->
-      <div id="loggedin">
 
-        <div id="container">
-            <div class="row">
-                <div class="col-md-1">
-                    <video playsinline autoplay></video>
-                    <canvas id = "canvasDom1" class="miniCanvas"></canvas>
-                    <canvas id = "canvasDom2" class="miniCanvas"></canvas>
-                    <canvas id = "canvasDom3" class="miniCanvas"></canvas>
-                    <canvas id = "canvasDom4" class="miniCanvas"></canvas>
-                </div>
-                <div class="col-md-10">
-                    <canvas id = "canvasMain"></canvas>
-                </div>
-                <div class="col-md-1">
-                    <!-- Sidebar  -->
-                    <nav id="sidebar">
-                        <ul class="list-unstyled components">
-                            <li id="dom1">
-                                <a id="dom1Aura"  class="tooltip" href="#" onclick="return false";>
-                                </a>
-                            </li>
-                            <li id="dom2">
-                                <a id="dom2Aura"  class="tooltip" href="#" onclick="return false";>
-                                </a>
-                            </li>
-                            <li id="dom3">
-                                <a id="dom3Aura"  class="tooltip" ref="#" onclick="return false";>
-                                </a>
-                            </li>
-                            <li id="dom4">
-                                <a id="dom4Aura"  class="tooltip" href="#" onclick="return false";>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-              </div>
-
+    <div id="loggedin">
+      <div class="row">
+        <div class="col-md-1">
+          <!-- Sidebar  -->          
+          <nav id="sidebar">
+            <ul class="list-unstyled components">
+                <li id="blue">
+                    <a id="blueAura"  class="tooltip" href="#" onclick="return false";>
+                    </a>
+                </li>
+                <li id="red">
+                    <a id="redAura"  class="tooltip" href="#" onclick="return false";>
+                    </a>
+                </li>
+                <li id="green">
+                    <a id="greenAura"  class="tooltip" ref="#" onclick="return false";>
+                    </a>
+                </li>
+                <li id="yellow">
+                    <a id="yellowAura"  class="tooltip" href="#" onclick="return false";>
+                    </a>
+                </li>
+            </ul>
+          </nav>
         </div>
-
-          
-        <div id="user-profile">
+        <div class="col-md-11">
+          <div id="container">
+            <video playsinline autoplay></video>
+            <canvas id = "canvasDom1" class="miniCanvas"></canvas>
+            <canvas id = "canvasDom2" class="miniCanvas"></canvas>
+            <canvas id = "canvasDom3" class="miniCanvas"></canvas>
+            <canvas id = "canvasDom4" class="miniCanvas"></canvas>
+            <canvas id = "canvasMain"></canvas>
+          </div>
+          <iframe src="" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" id="spotiplayer"></iframe>
         </div>
-        <div id="oauth">
-        </div>
-        <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button>
       </div>
-    <!--</div>-->
+    </div>
+
+    <div id="user-profile"></div>
+    <div id="oauth"></div>
+    <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button>
 
     <script id="user-profile-template" type="text/x-handlebars-template">
       <h1>Logged in to Spotify</h1>
@@ -136,8 +131,7 @@
       </dl>
     </script>
       
-       <iframe src="" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" id="spotiplayer"></iframe>
-
+    </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
     
     <script>
@@ -254,10 +248,10 @@
                 var clicked = $(event.target).text();
                 var clickedDom;
 
-                if (clicked.includes("Energetic")) clicked = 'green';
+                if (clicked.includes("Energetic")) clicked = 'yellow';
                 else if (clicked.includes("Melancholic")) clicked = 'blue';
                 else if (clicked.includes("Passionate")) clicked = 'red';
-                else if (clicked.includes("Thoughtful")) clicked = 'yellow';
+                else if (clicked.includes("Thoughtful")) clicked = 'green';
 
                 if (dom1 == clicked) clickedDom = 'dom1';
                 else if (dom2 == clicked) clickedDom = 'dom2';
@@ -277,6 +271,7 @@
                     dom2 = dom1;
                 }
                 dom1 = clicked;
+                orderFrame();
                 drawNavBar();
             });
         });
