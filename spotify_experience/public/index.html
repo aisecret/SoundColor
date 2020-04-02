@@ -164,6 +164,8 @@
         var access_token = params.access_token,
             refresh_token = params.refresh_token,
             error = params.error;
+          
+        var hapiness = new Array();  
 
         if (error) {
           alert('There was an error during the authentication');
@@ -183,23 +185,42 @@
                 success: function(response) {
                     
                     var songs = response.items;
-                    var hapiness = new Array();
+                    
                     $("#spotiplayer").attr("src","https://open.spotify.com/embed/track/"+songs[0].track.id);
                     
-                    for(var i=0; i<songs.length; i++)
-                        {
+                    /*for(var i=0; i<songs.length; i++)
+                        {*/
                             $.ajax({
-                                    url: 'https://api.spotify.com/v1/audio-features/'+songs[i].track.id,
+                                    url: 'https://api.spotify.com/v1/audio-features/'+songs[0].track.id,
                                     headers: {
                                       'Authorization': 'Bearer ' + access_token
                                     },
                                     success: function(response) {
-                                        hapiness.push(response);
+                                        hapiness.push(parseFloat(response.valence));
+                                        var ordered = new Array();
+                                        
+                                        var red = parseFloat(response.danceability);
+                                        var blue = parseFloat(response.valence);
+                                        var yellow = parseFloat(response.energy);
+                                        var green = parseFloat((response.loudness+60)/60);
+                                        
+                                        ordered[0] = red;
+                                        ordered[1] = blue;
+                                        ordered[2] = yellow;
+                                        ordered[3] = green;
+                                        
+                                        //console.log(ordered);
+                                        
+                                        ordered.sort();
+                                        
+                                        //console.log(ordered);
+                                        console.log('Red pos: '+ordered.indexOf(red));
+                                        console.log('Blue pos: '+ordered.indexOf(blue));
+                                        console.log('Yellow pos: '+ordered.indexOf(yellow));
+                                        console.log('Green pos: '+ordered.indexOf(green));
                                     }
                                 });
-                        }
-                    
-                  console.log(hapiness);
+                        //}
                     
                   userProfilePlaceholder.innerHTML = userProfileTemplate(response);
 
