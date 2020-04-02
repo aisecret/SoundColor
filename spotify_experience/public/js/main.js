@@ -69,8 +69,6 @@ function drawNavBar(){
 function checkDominance(color){
   var position = frames.findIndex(x => x.fill === color);
 
-  console.log(position);
-
   if (position == 0) heightProportion = 0.45;
   else if (position == 1) heightProportion = 0.24;
   else if (position == 2) heightProportion = 0.18;

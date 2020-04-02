@@ -204,20 +204,22 @@
                                         var yellow = parseFloat(response.energy);
                                         var green = parseFloat((response.loudness+60)/60);
                                         
-                                        ordered[0] = red;
-                                        ordered[1] = blue;
-                                        ordered[2] = yellow;
-                                        ordered[3] = green;
-                                        
-                                        //console.log(ordered);
-                                        
+                                        ordered.push([red, 'red']);
+                                        ordered.push([blue, 'blue']);
+                                        ordered.push([yellow, 'yellow']);
+                                        ordered.push([green, 'green']);
+
                                         ordered.sort();
-                                        
-                                        //console.log(ordered);
-                                        console.log('Red pos: '+ordered.indexOf(red));
-                                        console.log('Blue pos: '+ordered.indexOf(blue));
-                                        console.log('Yellow pos: '+ordered.indexOf(yellow));
-                                        console.log('Green pos: '+ordered.indexOf(green));
+
+                                        console.log(ordered[3]);
+                                        console.log(ordered[2]);
+                                        console.log(ordered[1]);
+                                        console.log(ordered[0]);
+
+                                        dom1 = ordered[3][1];
+                                        dom2 = ordered[2][1];
+                                        dom3 = ordered[1][1];
+                                        dom4 = ordered[0][1];
                                     }
                                 });
                         //}
