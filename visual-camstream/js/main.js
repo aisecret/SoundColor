@@ -63,19 +63,19 @@ function checkAura(color){
   var Auras = {};
 
   if (color == "blue"){
-    domColor = '#001b94';
+    domColor = '#2e2bff';
     domName = 'Melancholic';
   }
   else if (color == "red"){
-    domColor = '#720000';
+    domColor = '#d60000';
     domName = 'Passionate';
   }
   else if (color == "green"){
-    domColor = '#064f40';
+    domColor = '#26922a';
     domName = 'Energetic';
   }
   else if (color == "yellow"){
-    domColor = '#FCD440';
+    domColor = '#dae000';
     domName = 'Thoughtful';
   }
 
@@ -132,7 +132,7 @@ function drawMainCanvas (){
     // Create gradient
     var grd = ctx.createRadialGradient(frame.x+175, frame.y+150, 10, frame.x+190, frame.y+160, frame.w*0.6);
     grd.addColorStop(1, frame.fill);
-    grd.addColorStop(0, "black");
+    grd.addColorStop(0, "white");
 
     // Fill with gradient
     ctx.fillStyle = grd;

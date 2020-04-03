@@ -82,21 +82,21 @@ function checkAura(color){
   var Auras = {};
 
   if (color == "blue"){
-    domColor = '#001b94';
+    domColor = '#2e2bff';
     domName = 'Melancholic';
   }
   else if (color == "red"){
-    domColor = '#720000';
+    domColor = '#d60000';
     domName = 'Passionate';
   }
   else if (color == "green"){
-    domColor = '#064f40';
+    domColor = '#26922a';
     domName = 'Thoughtful';
   }
   else if (color == "yellow"){
-    domColor = '#FCD440';
+    domColor = '#dae000';
     domName = 'Energetic';
-  } 
+  }
 
   Auras["color"] = domColor;
   Auras["name"] = domName;
@@ -185,10 +185,10 @@ function handleSuccess(stream) {
   setTimeout(initiateMiniCanvas, 1000);
   setTimeout(drawNavBar, 1000);
 
-  setInterval(blendMiniCanvas, 8000, 0);
-  setInterval(blendMiniCanvas, 5000, 1);
-  setInterval(blendMiniCanvas, 3000, 2);
-  setInterval(blendMiniCanvas, 1000, 3);
+  setInterval(blendMiniCanvas, 1000, 0);
+  setInterval(blendMiniCanvas, 3000, 1);
+  setInterval(blendMiniCanvas, 5000, 2);
+  setInterval(blendMiniCanvas, 8000, 3);
   
   setInterval(drawMainCanvas, 1000);
 
