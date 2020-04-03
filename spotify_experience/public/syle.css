@@ -25,13 +25,13 @@ html {
     position: absolute;
     width: 842px;
     height: 131px;
-    left: 299px;
+    left: 389px;
     top: 20vh;
 
     font-family: Provicali;
     font-style: normal;
     font-weight: normal;
-    font-size: 144px;
+    font-size: 100px;
     line-height: 131.38%;
     /* or 189px */
 
@@ -47,13 +47,13 @@ html {
     position: absolute;
     width: 608px;
     height: 57px;
-    left: 416px;
+    left: 438px;
     top: 36vh;
 
     font-family: Merriweather;
     font-style: normal;
     font-weight: normal;
-    font-size: 48px;
+    font-size: 38px;
     line-height: 134.02%;
     /* or 64px */
 

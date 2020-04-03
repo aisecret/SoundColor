@@ -117,10 +117,10 @@ function drawMainCanvas (){
   canvas.height = video.videoHeight;
   
   var frames = [];
-  frames.push(new Frame(0, 0, 400, 500, dom1, canvasDom1));
-  frames.push(new Frame(400, 0, 350, 300, dom2, canvasDom2));
-  frames.push(new Frame(250, 300, 250, 200, dom3, canvasDom3));
-  frames.push(new Frame(500, 300, 300, 200, dom4, canvasDom4));
+  frames.push(new Frame(0, 0, 500, 300, dom1, canvasDom1));
+  frames.push(new Frame(0, 0, 500, 300, dom2, canvasDom2));
+  frames.push(new Frame(0, 0, 500, 300, dom3, canvasDom3));
+  frames.push(new Frame(0, 0, 500, 300, dom4, canvasDom4));
 
   for (var i in frames) {
     var frame = frames[i];
