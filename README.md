@@ -33,3 +33,5 @@ In order to run the different examples, open the folder with the name of the flo
     $ node app.js
 
 Then, open `http://localhost:8888` in a browser.
+
+![screenshot](https://github.com/aisecret/SoundCloud/blob/master/SoundCloud_ScreenShot.png)
